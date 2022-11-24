@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <item
+        android:id="@+id/currentServer"
+        android:enabled="true"
+        android:icon="@drawable/ic_server_white_36dp"
+        android:title="Servidor Actual" />
+
+    <item
+        android:id="@+id/changeServer"
+        android:enabled="true"
+        android:icon="@drawable/ic_server_white_36dp"
+        android:title="Cambiar de Servidor" />
+
+    <item
+        android:id="@+id/adminEnable"
+        android:enabled="true"
+        android:title="Admin Mode"
+        android:icon="@drawable/ic_account_tie_white_36dp"/>
+
+    <item
+        android:id="@+id/cleanDatabase"
+        android:enabled="true"
+        android:icon="@drawable/ic_recycle_white_36dp"
+        android:title="Release Database"
+        android:visible="false" />
+
+</menu>

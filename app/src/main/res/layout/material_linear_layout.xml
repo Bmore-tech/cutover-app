@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shrinkColumns="0,2"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/material_linear_layout_left_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_check_white_36dp" />
+
+            <RelativeLayout>
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="0,1">
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/material_linear_layout_text_material"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_span="2"
+                            android:text="#"
+                            android:textAlignment="textStart"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:id="@+id/material_linear_layout_text_external"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="#"
+                            android:textAlignment="textStart"
+                            android:textSize="18dp"
+                            android:visibility="gone" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/material_linear_layout_text_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_span="2"
+                            android:text="#"
+                            android:textAlignment="textStart"
+                            android:textSize="18dp" />
+
+                    </TableRow>
+                </TableLayout>
+
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/material_linear_layout_right_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_trash_can_outline_white_36dp" />
+
+
+        </TableRow>
+
+
+    </TableLayout>
+</RelativeLayout>

@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpDownActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainMenuHeader"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/inventarios_ciclicos"
+                android:backgroundTintMode="src_in"
+
+                />
+
+            <TextView
+                android:id="@+id/headerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="MENU"
+                android:textColor="#b2b2b2"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/settingUpDown"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_settings_grey600_48dp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mainMenuHeader"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:columnCount="2"
+        android:rowCount="14">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/solicitarCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="#2a4863"
+            android:onClick="executeAutoTask"
+            android:textAlignment="center"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#292b2d"
+                    app:cardCornerRadius="60dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:rowCount="4">
+
+                            <at.markushi.ui.CircleButton
+                                android:id="@+id/autoEvent"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="0"
+                                android:src="@drawable/ic_human_greeting_black_48dp"
+                                app:cb_color="#87a96b"
+                                app:cb_pressedRingWidth="8dip" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="1"
+                                android:layout_gravity="center"
+                                android:layout_toRightOf="@id/autoEvent"
+                                android:text="Solicitar Tarea"
+                                android:textColor="#b2b2b2"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+
+                        </GridLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/descargarCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="#2a4863"
+            android:onClick="executeFetch"
+            android:textAlignment="center"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#292b2d"
+                    app:cardCornerRadius="60dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:rowCount="4">
+
+
+                            <at.markushi.ui.CircleButton
+                                android:id="@+id/downloadButton"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="0"
+
+                                android:src="@drawable/baseline_cloud_download_black_48"
+                                android:tooltipText="Descargar Informacion"
+                                app:cb_color="#c775e0"
+                                app:cb_pressedRingWidth="8dip" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="1"
+                                android:layout_gravity="center"
+                                android:text="Datos Maestros"
+                                android:textColor="#b2b2b2"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+
+                        </GridLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cargarCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="#2a4863"
+            android:onClick="executeUploadTask"
+            android:textAlignment="center"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#292b2d"
+                    app:cardCornerRadius="60dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:rowCount="4">
+
+
+                            <at.markushi.ui.CircleButton
+                                android:id="@+id/uploadButton"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="0"
+
+                                android:src="@drawable/baseline_cloud_upload_black_48"
+                                android:tooltipText="Cargar Informacion"
+                                app:cb_color="#46a3cb"
+                                app:cb_pressedRingWidth="8dip" />
+
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="1"
+                                android:layout_gravity="center_vertical"
+                                android:text="Enviar Tarea"
+                                android:textColor="#b2b2b2"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+
+                        </GridLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cerrarSesionCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="6dp"
+            android:backgroundTint="#2a4863"
+            android:onClick="cancelSessionUpDown"
+            android:textAlignment="center"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#292b2d"
+
+                    app:cardCornerRadius="60dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="2"
+                            android:rowCount="4">
+
+                            <at.markushi.ui.CircleButton
+                                android:id="@+id/cancelSessionBtn"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="0"
+
+                                android:src="@drawable/round_exit_to_app_black_48"
+                                app:cb_color="#901010"
+                                app:cb_pressedRingWidth="8dip" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_row="0"
+                                android:layout_rowSpan="3"
+                                android:layout_column="1"
+                                android:layout_gravity="center_vertical"
+                                android:text="Cerrar Sesion"
+                                android:textColor="#b2b2b2"
+                                android:textSize="26dp"
+                                android:textStyle="bold" />
+
+                        </GridLayout>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </GridLayout>
+
+
+    <FrameLayout
+        android:id="@+id/upDownFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:animateLayoutChanges="true"
+        android:background="#000000"
+        android:elevation="100dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/upDownProgress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/circular_progress_view_bar" />
+
+            <TextView
+                android:id="@+id/loadingDownloadValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upDownProgress"
+                android:layout_centerInParent="true"
+                android:text="..." />
+
+
+            <TextView
+                android:id="@+id/loadingDownloadMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loadingDownloadValue"
+                android:layout_centerInParent="true"
+                android:text="Cargando... Espere" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

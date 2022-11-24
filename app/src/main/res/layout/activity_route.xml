@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".RouteActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/beginRouteHeader"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#2a4863"
+        android:onClick="eventCloseKeyboard"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/inventarios_ciclicos"
+                android:backgroundTintMode="src_in"
+
+                />
+
+            //android:textColor="#b2b2b2"
+
+            <TextView
+                android:id="@+id/headerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="RUTA DE CONTEO"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/operation_menu_route"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/round_menu_24"
+                android:onClick="showPopUpRoute" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/beginRouteBottom"
+        android:layout_below="@+id/beginRouteHeader"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            //Area Sociedad
+
+            //Almacen Container
+
+            <GridLayout
+                android:id="@+id/tableHandlerAlmacen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idLgnumLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:text="Almacen: "
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/idLgnumSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|start"
+                    android:maxLength="14"
+                    android:scrollbars="horizontal"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/idLgnumViewBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center"
+                    android:onClick="showSpinnerStorage"
+                    android:src="@drawable/round_arrow_drop_down_circle_white_36" />
+
+
+            </GridLayout>
+
+
+            //// AREA DE TIPOS DE ALMACEN - ZONA
+
+            <GridLayout
+                android:id="@+id/tableHandlerZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandlerAlmacen"
+                android:layout_marginBottom="15dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idLgtypLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+
+                    android:text="Zona: "
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/idLgtypSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_columnWeight="1"
+                    android:maxLength="16"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/idLgtypViewBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:onClick="showSpinnerZone"
+                    android:src="@drawable/round_arrow_drop_down_circle_white_36" />
+
+            </GridLayout>
+
+
+            //Carril
+
+            <GridLayout
+                android:id="@+id/tableHandler1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandlerZone"
+                android:layout_marginBottom="15dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idLgplaLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:text="Carril: "
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/idLgplaTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:hint="Carril..."
+                    android:scrollbars="horizontal"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/idLgplaBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:background="@drawable/round_remove_red_eye_white_36"
+                    android:onClick="lgplaButtonOnClick"
+                    android:tooltipText="Ver Carriles" />
+
+
+            </GridLayout>
+
+
+            ///// MATERIAL
+            <GridLayout
+                android:id="@+id/tableHandler2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler1"
+                android:layout_marginBottom="15dp"
+                android:columnCount="5"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idMatnrLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:gravity="center"
+                    android:text="Mat: "
+                    android:textSize="20dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/idMatnrTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnSpan="2"
+                    android:layout_columnWeight="1"
+                    android:hint="Material..."
+                    android:maxLength="7"
+                    android:textSize="20dp"
+                    android:textStyle="bold"  />
+
+                <ImageView
+                    android:id="@+id/idScanMatnrBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="3"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/idMatnrBtn"
+                    android:onClick="materialScanner"
+                    android:src="@drawable/ic_barcode_scan_white_36dp"
+                    android:tooltipText="Escanear Codigo" />
+
+                <Button
+                    android:id="@+id/idMatnrBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_column="4"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/round_remove_red_eye_white_36"
+                    android:onClick="matrnButtonOnClick"
+                    android:textSize="14dp"
+                    android:tooltipText="Ver Material" />
+
+
+            </GridLayout>
+
+
+            // DescipcionMaterial
+
+            <GridLayout
+                android:id="@+id/tableHandlerNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler2"
+                android:layout_marginBottom="15dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idDescMatnrTxt"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnWeight="1"
+                    android:hint="Descripcion Material"
+                    android:scrollbars="horizontal"
+                    android:singleLine="true"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/idMaterialMatch"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/ic_magnify_white_36dp"
+                    android:onClick="onClickMatchMaterial"
+                    android:tooltipText="Buscar Material" />
+
+                <ImageView
+                    android:id="@+id/idNoteAdd"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/round_note_add_white_36"
+                    android:onClick="onClickNote"
+                    android:tooltipText="Agregar Nota" />
+
+
+            </GridLayout>
+
+
+            // Seccion de Secuencias y fechas
+
+            <TableLayout
+                android:id="@+id/tableHandler3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandlerNotes"
+                android:layout_marginBottom="10dp"
+                android:shrinkColumns="0,2,3"
+                android:stretchColumns="1">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/idSeqLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="Sec: "
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/idSeqValLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="#"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/textProdDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:text="Fecha:"
+                        android:textSize="18dp" />
+
+
+                    <TextView
+                        android:id="@+id/idProductionDateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="2dp"
+                        android:text="##/##/##"
+                        android:textSize="20dp" />
+
+                    <ImageView
+                        android:id="@+id/idProdDateIco"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:onClick="onClickCalendar"
+                        android:src="@drawable/twotone_date_range_white_36"
+                        android:tooltipText="Agregar Fecha de Produccion" />
+
+
+                </TableRow>
+            </TableLayout>
+
+            // Lote
+            <GridLayout
+                android:id="@+id/tableHandler13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler3"
+                android:layout_marginBottom="15dp"
+                android:columnCount="5"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:gravity="center"
+                    android:text="Lote: "
+                    android:textSize="20dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/idLoteTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_columnSpan="2"
+                    android:layout_columnWeight="1"
+                    android:hint="Lote..."
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </GridLayout>
+
+            // Nuevo atributo Estatus de PT
+
+            <GridLayout
+                android:id="@+id/tableHandler12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler13"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+                // Class Valuation Section
+
+                <TextView
+                    android:id="@+id/idPtLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="ESTATUS PT"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/idPtSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="N/A"
+                    android:textSize="18dp" />
+
+                <ImageButton
+                    android:id="@+id/idPtBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:onClick="reselecEstatusPt"
+                    android:src="@drawable/round_keyboard_arrow_down_white_36" />
+
+            </GridLayout>
+
+
+            // Class Valuation Section
+
+            <GridLayout
+                android:id="@+id/tableHandler8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler12"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idClassLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="C. DE VALUACION"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/idClassSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="N/A"
+                    android:textSize="18dp" />
+
+                <ImageButton
+                    android:id="@+id/idPzClassBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:onClick="reselectValuation"
+                    android:src="@drawable/round_keyboard_arrow_down_white_36" />
+
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/tableHandler7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler5"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idPzLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="PIEZA POR CAJA"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/idPzSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="0"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/idPzSpinnerBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:onClick="reselectSpinnerPza"
+                    android:src="@drawable/round_keyboard_arrow_down_white_36" />
+
+                <TextView
+                    android:id="@+id/idPzKeyValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+
+            </GridLayout>
+
+            // Cajas por Cama
+
+            <GridLayout
+                android:id="@+id/tableHandler5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler4"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+
+                <TextView
+                    android:id="@+id/idCajLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="CAJA POR CAMA"
+                    android:textSize="16dp" />
+
+
+                <TextView
+                    android:id="@+id/idCajSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="0"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/idCajSpinnerBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center_vertical"
+                    android:background="#00000000"
+                    android:onClick="reselectSpinnerCaj"
+                    android:src="@drawable/round_keyboard_arrow_down_white_36" />
+
+                <TextView
+                    android:id="@+id/idCajKeyValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+
+            </GridLayout>
+
+
+            // Camas por tarima
+
+
+            <GridLayout
+                android:id="@+id/tableHandler4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler8"
+                android:layout_marginTop="10dp"
+                android:columnCount="3"
+                android:rowCount="1">
+
+                <TextView
+                    android:id="@+id/idCamLbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="CAMA POR PALLET"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/idCamSpin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_columnWeight="1"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="0"
+                    android:textSize="20dp" />
+
+                <ImageButton
+                    android:id="@+id/idCamSpinnerBtn"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="reselectSpinnerCam"
+                    android:background="#00000000"
+                    android:src="@drawable/round_keyboard_arrow_down_white_36" />
+
+            </GridLayout>
+
+
+            <TableLayout
+                android:id="@+id/idTableQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tableHandler7"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:stretchColumns="0,1,2">
+
+                //Table Header
+
+                <TableRow android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/idTopQuaTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:text="Cantidad"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idTopUnitTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:text="Unidad Conteo"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idTopBoxTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_gravity="center"
+                        android:text="Caja"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                //FirstRow
+
+                <TableRow
+                    android:id="@+id/tableTarimaRow"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:backgroundTint="#515151"
+                        android:onClick="showPopUpCalcTar"
+                        app:cardCornerRadius="6dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/idQuaHUTbltxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <TextView
+                        android:id="@+id/idUnitHUTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:text="PALLET"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idBoxHUTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_gravity="end"
+                        android:text="#"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableCamaRow"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:backgroundTint="#515151"
+                        android:onClick="showPopUpCalcBed"
+                        app:cardCornerRadius="6dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/idQuaBedTbltxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/idUnitBedTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:text="CAMA"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idBoxBedTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_gravity="end"
+                        android:text="#"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:backgroundTint="#515151"
+                        android:onClick="showPopUpCalcUM"
+                        app:cardCornerRadius="6dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/idQuaBoxTbltxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <TextView
+                        android:id="@+id/idUnitBoxTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:text="CAJA"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idBoxBoxTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_gravity="end"
+                        android:text="#"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+
+                <TableRow
+                    android:id="@+id/tablePzRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:backgroundTint="#515151"
+                        android:onClick="showPopUpCalcPZ"
+                        app:cardCornerRadius="6dp">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/idQuaEaTbltxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="center"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <TextView
+                        android:id="@+id/idUnitEaTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="center"
+                        android:text="PZ"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idTotEaTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:layout_gravity="end"
+                        android:text="#"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="5dp">
+
+
+                    <TextView
+                        android:id="@+id/idUnitTotTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="0"
+                        android:layout_gravity="center"
+                        android:text="TOTAL"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/idBoxTotTblLbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:layout_gravity="end"
+                        android:layout_span="2"
+                        android:text="#"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/beginRouteBottom"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical|center"
+            android:gravity="center"
+            android:stretchColumns="0">
+
+            <Button
+                android:id="@+id/idBtnMatEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#009999"
+                android:onClick="finalizarMaterial"
+                android:text="Finalizar Material"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+            <Button
+                android:id="@+id/idBtnCarEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#009999"
+                android:onClick="finalizarCarril"
+                android:text="Finalizar Carril"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/idBtnZoneEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#d30000"
+                android:onClick="finalizarZona"
+                android:text="Finalizar Zona"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/idBtnAlmacenEnd"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_column="0"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:backgroundTint="#d30000"
+                android:onClick="finalizarAlmacen"
+                android:text="Finalizar Almacen"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/routeProgLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:animateLayoutChanges="true"
+        android:background="#000000"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/routeProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/circular_progress_view_bar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/routeProgressBar"
+                android:layout_centerInParent="true"
+                android:text="Cargando... Espere" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</RelativeLayout>

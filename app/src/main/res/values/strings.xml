@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">inv-e</string>
+
+    <string name="title_activity_begin_count">BeginCountActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string name="is_Emm_Maganaged">¿Dispositivo Enrolado?</string>
+    <string name="is_Emm_Maganaged_Description">Flag para validar si el dispositivo se encuentra enrolado</string>
+
+    <string name="emm_user">Usuario Enrolado</string>
+    <string name="emm_user_description">Id Del Usuario Enrolado</string>
+
+    <string name="emm_displayname">Nombre de Usuario Enrolado</string>
+    <string name="emm_displayname_description">Nombre de Usuario Enrolado</string>
+
+
+    <string name="codeWord">UvVdUmementoonagrotrabuchet</string>
+    <string name="algo">DESede</string>
+</resources>

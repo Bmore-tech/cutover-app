@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gmodelo.cutoverback.Activity.MatchCodeMaterialActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMaterialHeader"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+
+            <TextView
+                android:id="@+id/cardMaterialTextHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusedByDefault="true"
+                android:gravity="center"
+                android:text="BUSQUEDA DE MATERIAL"
+                android:textColor="#ffffff"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/materiales_operation_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/round_arrow_back_ios_24" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMaterialSearch"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardMaterialHeader"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#d1e0ff"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMaterialSearchInner"
+                style="@style/Widget.MaterialComponents.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#2a4863">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/mat001text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:text="Ingrese Material o Descripción"
+                        android:textSize="18dp" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mat001text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:columnCount="2"
+                        android:rowCount="1">
+
+                        <EditText
+                            android:id="@+id/materialTextEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:layout_columnWeight="1"
+                            android:hint="..."
+                            android:singleLine="true"
+                            android:textAlignment="textEnd"
+                            android:textSize="18dp" />
+
+                        <ImageButton
+                            android:id="@+id/searchMaterialBtn"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:backgroundTint="#2a4863"
+                            android:src="@drawable/ic_magnify_white_36dp" />
+                    </GridLayout>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/beginCustomConfirmFooter"
+        android:layout_below="@+id/cardMaterialSearch">
+
+        <TableLayout
+            android:id="@+id/materialTableWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableLayout>
+
+    </ScrollView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/beginCustomConfirmFooter"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/marerialProgLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:animateLayoutChanges="true"
+        android:background="#000000"
+        android:elevation="50dp"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/routeProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/circular_progress_view_bar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/routeProgressBar"
+                android:layout_centerInParent="true"
+                android:text="Cargando... Espere" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

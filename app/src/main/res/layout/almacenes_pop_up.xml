@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/beginAlmacenSpinnerHeader"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="2dp"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+            <TextView
+                android:id="@+id/headerTextViewAlmacen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="ALMACENES"
+                android:textColor="#b2b2b2"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/almacenes_operation_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/round_arrow_back_ios_24" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beginAlmacenSpinnerHeader">
+
+        <TableLayout
+            android:id="@+id/tableLayoutAlmacen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:shrinkColumns="0"
+            android:stretchColumns="1">
+
+        </TableLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

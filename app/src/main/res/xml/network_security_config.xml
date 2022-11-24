@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">carosolutions-dev.ab-inbev.com</domain>
+        <trust-anchors>
+            <certificates src="user"/>
+            <certificates src="system"/>
+            <certificates src="@raw/carosolutions_prd"/>
+            <certificates src="@raw/carosolutions_dev"/>
+            <certificates src="@raw/carosolutions_prd_2022"/>
+            <certificates src="@raw/carosolutions_dev_2022"/>
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

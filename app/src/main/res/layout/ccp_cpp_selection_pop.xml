@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/beginselectionSpinnerHeader"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="1dp"
+        android:backgroundTint="#2a4863"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal|center">
+
+            <TextView
+                android:id="@+id/headerTextViewSelection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="SELECCIONE"
+                android:textColor="#b2b2b2"
+                android:textSize="26dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/Selection_operation_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/round_arrow_back_ios_24" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/beginselectionSpinnerHeader">
+
+        <TableLayout
+            android:id="@+id/tableLayoutSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0">
+
+        </TableLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

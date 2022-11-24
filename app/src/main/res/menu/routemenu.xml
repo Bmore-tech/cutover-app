@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/refreshRoute"
+        android:title="Limpiar Seleccion" />
+
+    <item
+        android:id="@+id/zoneFinish"
+        android:title="Finalizar Zona" />
+
+    <item
+        android:id="@+id/informationRoute"
+        android:title="Conteos Pendientes" />
+
+    <item
+        android:id="@+id/repeatLgpla"
+        android:title="Repetir Carril Anterior" />
+
+    <item
+        android:id="@+id/notTarima"
+        android:title="Habilitar/Deshabilitar Tarima" />
+
+    <item
+        android:id="@+id/notClassVal"
+        android:title="Habilitar/Deshabilitar Valorización" />
+
+    <item
+        android:id="@+id/cancelRoute"
+        android:title="Cancelar Tarea" />
+
+
+</menu>
