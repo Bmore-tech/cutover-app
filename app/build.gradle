@@ -18,7 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    def appName = "inv_e"
+                    def appName = "cut_o"
                     outputFileName = appName + "_${variant.versionName}.apk"
                 }
             }
@@ -33,23 +33,55 @@ android {
     }
 }
 
+configurations.all {
+    // Test Jacoco is not used it at the moment
+    exclude group: 'org.jacoco'
+    // Test JUnit is not used it at the moment
+    exclude group: 'org.junit.jupiter'
+    exclude group: 'org.junit.platform'
+    exclude group: 'junit', module: 'junit'
+    // To avoid inclusion or force to use specific libraries
+    exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
+    exclude group: 'xerces', module: 'xercesImpl'
+    exclude group: 'org.apache.commons', module: 'commons-compress'
+    exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    exclude group: 'commons-io', module: 'commons-io'
+    exclude group: 'com.sun.activation', module: 'javax.activation'
+    resolutionStrategy {
+        force 'com.google.protobuf:protobuf-java:3.21.9'
+        force 'org.jetbrains.kotlin:kotlin-stdlib:1.7.21'
+        force 'com.google.guava:guava:31.1-jre'
+        force 'com.google.code.gson:gson:2.9.1'
+        force 'commons-codec:commons-codec:1.15'
+    }
+    // other ones dependencies
+    exclude group: 'org.jetbrains.intellij.deps', module: 'trove4j'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0@aar'
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.9.1'
     implementation 'com.google.zxing:core:3.3.2'
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.google.android.material:material:1.0.0-beta01'
     implementation 'android.arch.persistence.room:runtime:1.1.1'
-    implementation 'com.balsikandar.android:crashreporter:1.1.0'
+    implementation 'com.balsikandar.android:crashreporter:1.0.9'
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0-rc01'
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.android.support:design:30.0.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
-    implementation 'org.jetbrains:annotations-java5:15.0'
+    //implementation 'org.jetbrains:annotations-java5:15.0'
+    // Snyk solutions
+    implementation 'com.google.protobuf:protobuf-java:3.21.9'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.21'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'commons-codec:commons-codec:1.15'
 }

@@ -54,8 +54,8 @@ public class ResponseVariability {
 
     static {
         RELATIONINVESERVER = new HashMap<Integer, ServerBean>();
-        RELATIONINVESERVER.put(DEV_INV_E_ID, new ServerBean("https://carosolutions-dev.ab-inbev.com", "444", "Inventarios Ciclicos DEV"));
-        RELATIONINVESERVER.put(PRD_INV_E_ID, new ServerBean("https://carosolutions.ab-inbev.com", "444", "Inventarios Ciclicos PRD"));
+        RELATIONINVESERVER.put(DEV_INV_E_ID, new ServerBean("https://carosolutions-dev.ab-inbev.com", "444", "Cut Over DEV"));
+        RELATIONINVESERVER.put(PRD_INV_E_ID, new ServerBean("https://carosolutions.ab-inbev.com", "444", "Cut Over PRD"));
     }
 
 
