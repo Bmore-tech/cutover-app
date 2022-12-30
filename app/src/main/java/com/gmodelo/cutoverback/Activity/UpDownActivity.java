@@ -784,7 +784,7 @@ public class UpDownActivity extends AppCompatActivity {
                                     CommonUtilities.cancelSession(context, activity);
                                 }
                             }
-                            , R.drawable.round_note_add_white_36, context, "#D68910");
+                            , R.drawable.round_note_add_white_36, context, "#41A802");
 
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.SESSIONNOTFOUND) {
                     startActivity(new Intent(activity, LoginActivity.class));
