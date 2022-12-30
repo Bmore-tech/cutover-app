@@ -14,7 +14,7 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="6dp"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
 
         app:cardElevation="10dp">
 
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -135,7 +135,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -198,7 +198,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -261,7 +261,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -325,7 +325,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -390,7 +390,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="6dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 
@@ -454,7 +454,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="2dp"
-                android:backgroundTint="#2a4863"
+                android:backgroundTint="#ba7600"
                 android:textAlignment="center"
                 app:cardElevation="10dp">
 

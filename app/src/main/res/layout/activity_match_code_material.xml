@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         app:cardElevation="15dp">
 
         <RelativeLayout
@@ -71,7 +71,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:backgroundTint="#2a4863">
+                android:backgroundTint="#ba7600">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                             android:id="@+id/searchMaterialBtn"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:backgroundTint="#2a4863"
+                            android:backgroundTint="#ba7600"
                             android:src="@drawable/ic_magnify_white_36dp" />
                     </GridLayout>
 
@@ -141,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         app:cardElevation="10dp">
 
         <RelativeLayout

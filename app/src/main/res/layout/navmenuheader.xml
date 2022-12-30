@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#2a4863">
+        android:backgroundTint="#ba7600">
 
         <RelativeLayout
             android:layout_width="wrap_content"

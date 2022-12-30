@@ -15,7 +15,7 @@
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="5dp"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         android:onClick="eventCloseKeyboard"
         app:cardElevation="10dp">
 
@@ -998,7 +998,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         app:cardElevation="10dp">
 
         <RelativeLayout

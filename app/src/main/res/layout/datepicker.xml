@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         app:cardElevation="10dp">
 
         <RelativeLayout
@@ -58,7 +58,7 @@
         android:layout_height="60dp"
         android:layout_below="@+id/datePickerWrap"
         android:layout_marginBottom="2dp"
-        android:backgroundTint="#2a4863"
+        android:backgroundTint="#ba7600"
         app:cardElevation="10dp">
 
         <RelativeLayout
