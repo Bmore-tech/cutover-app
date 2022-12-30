@@ -15,6 +15,7 @@ public class ResponseVariability {
     public static final int REMOVED = 6;
     public static final int UPDATED = 7;
     public static final int ERROR = 9;
+    public static final int SUCCESSFULL_RECOUNT = 11;
     public static final int IPASSWORDNOTMATCH = -101;
     public static final int SESSIONNOTFOUND = -106;
     public static final int IUSERNOTTASK = -107;

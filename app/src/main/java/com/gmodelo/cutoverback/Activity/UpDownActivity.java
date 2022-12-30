@@ -776,6 +776,16 @@ public class UpDownActivity extends AppCompatActivity {
                             }
                             , R.drawable.ic_exclamation_white_36dp, context, "#41A802");
 
+                } else if (response.getAbstractResult().getResultId() == ResponseVariability.SUCCESSFULL_RECOUNT) {
+                    CommonUtilities.CustomColorWarningDialog("EXITO, RECONTEO", " Ruta cargada de forma exitosa, \n Diferencias encontradas, \n La sesión se cerrará. \n Tienes una tarea nueva: RECONTAR.",
+                            activity, null, "Continuar", null, new CommonUtilities.CustomCallBack<Integer>() {
+                                @Override
+                                public void customCallBack(Integer ret) {
+                                    CommonUtilities.cancelSession(context, activity);
+                                }
+                            }
+                            , R.drawable.round_note_add_white_36, context, "#D68910");
+
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.SESSIONNOTFOUND) {
                     startActivity(new Intent(activity, LoginActivity.class));
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.ITASKCLOSED) {
