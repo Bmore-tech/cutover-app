@@ -111,7 +111,7 @@ public class BeginCountActivity extends AppCompatActivity {
 
                     // Validación de tipo de conteo
                     if (userRoute.getType().equals("1"))
-                        tipoInventario.setText("Cíclico");
+                        tipoInventario.setText("Mensual (1 Contador)");
                     if (userRoute.getType().equals("2"))
                         tipoInventario.setText("Mensual");
                     if (userRoute.getType().equals("3"))
