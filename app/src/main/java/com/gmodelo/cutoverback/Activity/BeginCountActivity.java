@@ -21,7 +21,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.balsikandar.crashreporter.CrashReporter;
-import com.gmodelo.cutoverback.Activity.R;
+import com.gmodelo.cutoverback.CustomObjects.CommunicationObjects;
 import com.gmodelo.cutoverback.StoredBeans.LoginStored;
 import com.gmodelo.cutoverback.StoredBeans.SpecialSapCountBean;
 import com.gmodelo.cutoverback.Utilities.CommonUtilities;
@@ -94,7 +94,7 @@ public class BeginCountActivity extends AppCompatActivity {
         if (loginString != null) {
             Log.i("Login Token", loginString);
             storedLogin = gson.fromJson(loginString, LoginStored.class);
-            String route = CommonUtilities.PushGsonVariable(STOREDROUTE, context);
+            String route = CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context);
             if (route != null) {
                 String isCompletedString = CommonUtilities.PushGsonVariable(TASKCOMPLETED, context);
                 if (isCompletedString != null) {

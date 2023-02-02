@@ -1,9 +1,15 @@
 package com.gmodelo.cutoverback.Utilities;
 
+import android.content.res.Resources;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.gmodelo.cutoverback.Activity.R;
 
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +19,7 @@ import java.util.Base64;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;

@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -46,6 +47,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.balsikandar.crashreporter.CrashReporter;
 import com.gmodelo.cutoverback.CustomObjects.AbstractResults;
+import com.gmodelo.cutoverback.CustomObjects.CommunicationObjects;
 import com.gmodelo.cutoverback.CustomObjects.ResponseVariability;
 import com.gmodelo.cutoverback.DaoBeans.MaterialDescrptionBean;
 import com.gmodelo.cutoverback.DaoBeans.TarimasDescriptionBean;
@@ -78,8 +80,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
 
 public class RouteActivity extends AppCompatActivity {
 
@@ -131,8 +133,7 @@ public class RouteActivity extends AppCompatActivity {
     String prodDate;
 
     String zoneDisp = "MX";
-    AlertDialog spinnerDialog;
-    boolean isTarima = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +206,7 @@ public class RouteActivity extends AppCompatActivity {
         tablePzRow = findViewById(R.id.tablePzRow);
         routeModel = ViewModelProviders.of(this).get(RouteViewModel.class);
         login = CommonUtilities.getLoginStructure(context);
+        Log.e("debug","Login:" + login.toString());
         mapLgplaKey = null;
         gson = new Gson();
         try {
@@ -260,7 +262,7 @@ public class RouteActivity extends AppCompatActivity {
                     }
                 });
 
-            } else if (login != null && login.getLoginBean().getLoginLang().equalsIgnoreCase("CO")) {
+            } else if (login != null && (login.getLoginBean().getLoginLang().equalsIgnoreCase("CO") || login.getLoginBean().getLoginLang().equalsIgnoreCase("RD"))) {
                 material.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 material.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -380,6 +382,32 @@ public class RouteActivity extends AppCompatActivity {
 
     public void onClickMatchMaterial(View view) {
         startActivity(new Intent(context, MatchCodeMaterialActivity.class));
+    }
+
+    private class doSearchMaterialBackground extends AsyncTask<MaterialDescrptionBean, Void, MaterialDescrptionBean> {
+
+        RouteViewModel asyncModel;
+
+        public doSearchMaterialBackground(RouteViewModel asyncModel) {
+            this.asyncModel = asyncModel;
+        }
+
+        @Override
+        protected MaterialDescrptionBean doInBackground(MaterialDescrptionBean... materialDescrptionBeans) {
+            MaterialDescrptionBean listBean;
+            return materialDescrptionBeans[0];
+        }
+
+        @Override
+        protected void onPostExecute(MaterialDescrptionBean materialDescrptionBeans) {
+            List<MaterialDescrptionBean> listBean;
+            try {
+                listBean = routeModel.getMaterialByValues(materialDescrptionBeans);
+            } catch (Exception e) {
+                listBean = new ArrayList<>();
+            }
+            setMaterialDataByList(listBean);
+        }
     }
 
     public void fillFirstRunForRoute() {
@@ -585,7 +613,7 @@ public class RouteActivity extends AppCompatActivity {
         // Validación de fecha frescura y Lote
         if (routeUser.getType().equals("4")) {
             if (idLoteTxt.getText().toString() == null ||
-                    idLoteTxt.getText().toString().isEmpty() ||
+                    idLoteTxt.getText().toString().toUpperCase().isEmpty() ||
                     textProduction.getText().toString() == null ||
                     textProduction.getText().toString().isEmpty()) {
                 CommonUtilities.CustomWarningDialog("Advertencia!", "Los campos de Fecha frescura y Lote son obligatorios", activity, null,
@@ -604,7 +632,7 @@ public class RouteActivity extends AppCompatActivity {
     }
 
     private void enviarMaterial(boolean ok) {
-        if (ok) {
+        if(ok) {
             if (eClassValSapEntity != null && eClassValSapEntity.getBwtar() != null) {
                 currentValue.setCval(eClassValSapEntity.getBwtar());
             }
@@ -702,6 +730,7 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
+
     public boolean getNextLgort() {
         RouteUserPositionBean routeOper = routeUser.getPositions().get(routeStoredBean.getiPosRoute());
         String lgort = routeOper.getLgort();
@@ -747,6 +776,7 @@ public class RouteActivity extends AppCompatActivity {
         return isClosed;
     }
 
+
     public void zonePositionDone(String lgpla, final int posicion) {
         CommonUtilities.CustomConfirmDialog("Advertencia!", "El Carril: " + lgpla + " fue contado anteriormente \n ¿Desea editarlo?", activity,
                 null, "Editar", "Finalizar", new CommonUtilities.CustomCallBack<Integer>() {
@@ -762,6 +792,7 @@ public class RouteActivity extends AppCompatActivity {
                     }
                 }, R.drawable.ic_exclamation_white_48dp, context);
     }
+
 
     public boolean checkIfZoneEnd() {
         boolean isZoneEnded = true;
@@ -809,6 +840,7 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
+
     public boolean hasMoreZonesLgort() {
         RouteUserPositionBean routeOper = routeUser.getPositions().get(routeStoredBean.getiPosRoute());
         String lgort = routeOper.getLgort();
@@ -829,6 +861,7 @@ public class RouteActivity extends AppCompatActivity {
         }
         return hasMoreZone;
     }
+
 
     public void getNextClean() {
         material.setText("");
@@ -866,6 +899,9 @@ public class RouteActivity extends AppCompatActivity {
         tableHandler13.setVisibility(View.GONE);
     }
 
+
+    AlertDialog spinnerDialog;
+
     public void showSpinnerStorage(View view) {
         try {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
@@ -897,8 +933,8 @@ public class RouteActivity extends AppCompatActivity {
                     });
                 }
 
-                if ((pair.getKey().toString() + " - " + pair.getValue()).length() > 20) {
-                    zoneValue.setText((pair.getKey().toString() + " - " + pair.getValue()).substring(0, 20));
+                if (new String(pair.getKey().toString() + " - " + pair.getValue()).length() > 20) {
+                    zoneValue.setText(new String(pair.getKey().toString() + " - " + pair.getValue()).substring(0, 20));
                 } else {
                     zoneValue.setText(pair.getKey().toString() + " - " + pair.getValue());
                 }
@@ -978,7 +1014,7 @@ public class RouteActivity extends AppCompatActivity {
             ImageButton btnLgortCancel = mLgort.findViewById(R.id.almacenes_operation_back);
             TextView headerView = mLgort.findViewById(R.id.headerTextViewAlmacen);
             headerView.setText("ZONAS");
-            for (final ZoneStoredBean zoneId : routeStoredBean.getZoneByLgort().get(routeOper.getLgort())) {
+            for (final ZoneStoredBean zoneId : (List<ZoneStoredBean>) routeStoredBean.getZoneByLgort().get(routeOper.getLgort())) {
                 View zonLView = layoutInflater.inflate(R.layout.zone_lgort_linear_layout, null);
                 ImageButton iconBtn = zonLView.findViewById(R.id.zoneLgortImagebutton);
                 iconBtn.setClickable(false);
@@ -996,8 +1032,8 @@ public class RouteActivity extends AppCompatActivity {
                         }
                     });
                 }
-                if ((zoneId.getZoneID() + " - " + zoneId.getZoneD()).length() > 20) {
-                    zoneValue.setText((zoneId.getZoneID() + " - " + zoneId.getZoneD()).substring(0, 20));
+                if (new String(zoneId.getZoneID() + " - " + zoneId.getZoneD()).length() > 20) {
+                    zoneValue.setText(new String(zoneId.getZoneID() + " - " + zoneId.getZoneD()).substring(0, 20));
                 } else {
                     zoneValue.setText(zoneId.getZoneID() + " - " + zoneId.getZoneD());
                 }
@@ -1846,7 +1882,7 @@ public class RouteActivity extends AppCompatActivity {
     public void showMaterialSelector(String[] materialValues) {
         List<MaterialDescrptionBean> showList = new ArrayList<>();
         // Validamos por el lote
-        if (materialValues[4] != null) {
+        if(materialValues[4] != null) {
             idLoteTxt.setText(materialValues[4].toUpperCase());
             lote = materialValues[4].toUpperCase();
         } else {
@@ -1855,7 +1891,7 @@ public class RouteActivity extends AppCompatActivity {
         }
 
         // Validamos prodDate
-        if (materialValues[4] != null) {
+        if(materialValues[4] != null) {
             prodDate = materialValues[5];
         } else {
             prodDate = "";
@@ -1915,6 +1951,9 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
+
+    boolean isTarima = false;
+
     public void getTarimaForMaterial() {
         cancelLoading();
         if (!isTarima) {
@@ -1945,6 +1984,7 @@ public class RouteActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public void setMaterialDataByList(List<MaterialDescrptionBean> beanList) {
         if (!beanList.isEmpty()) {
@@ -1977,6 +2017,7 @@ public class RouteActivity extends AppCompatActivity {
 
     }
 
+
     public void showPopUpCalcTar(View view) {
         final TextView txtView = findViewById(R.id.idQuaHUTbltxt);
         final String oldValue = txtView.getText().toString().equals("") ? "0" : txtView.getText().toString();
@@ -2007,6 +2048,7 @@ public class RouteActivity extends AppCompatActivity {
             }
         }, activity, context, display);
     }
+
 
     public void showPopUpCalcBed(View view) {
         final TextView txtView = findViewById(R.id.idQuaBedTbltxt);
@@ -2061,6 +2103,7 @@ public class RouteActivity extends AppCompatActivity {
         }, activity, context, display);
     }
 
+
     public void showPopUpCalcPZ(View view) {
         final TextView txtView = findViewById(R.id.idQuaEaTbltxt);
         final String oldValue = txtView.getText().toString().equals("") ? "0" : txtView.getText().toString();
@@ -2084,6 +2127,7 @@ public class RouteActivity extends AppCompatActivity {
             }
         }, activity, context, display);
     }
+
 
     public void sumPrevQuan() {
         if (PPCMAPZia.isEmpty()) {
@@ -2138,6 +2182,7 @@ public class RouteActivity extends AppCompatActivity {
         }, context);
     }
 
+
     public void showPopUpRoute(View view) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -2173,6 +2218,7 @@ public class RouteActivity extends AppCompatActivity {
         popup.inflate(R.menu.routemenu);
         popup.show();
     }
+
 
     public void repeatPreviousLgpla() {
         String prevValue = CommonUtilities.PushGsonVariable(LASTCOUNTEDLGPLA, context);
@@ -2249,8 +2295,9 @@ public class RouteActivity extends AppCompatActivity {
 
     }
 
+
     public Boolean isTarimaEnabled() {
-        String isTarima = CommonUtilities.PushGsonVariable(NOTTARIMA, context);
+        String isTarima = CommonUtilities.PushGsonVariable(CommunicationObjects.NOTTARIMA, context);
         Boolean tarEnabled = true;
         if (isTarima != null && !isTarima.isEmpty()) {
             AbstractResults tarima = gson.fromJson(isTarima, AbstractResults.class);
@@ -2258,6 +2305,7 @@ public class RouteActivity extends AppCompatActivity {
         }
         return tarEnabled;
     }
+
 
     public void globalNotClassValuation() {
         if (!isValuationEnabled()) {
@@ -2309,7 +2357,7 @@ public class RouteActivity extends AppCompatActivity {
     }
 
     public Boolean isValuationEnabled() {
-        String isValuation = CommonUtilities.PushGsonVariable(NOTVALUATION, context);
+        String isValuation = CommonUtilities.PushGsonVariable(CommunicationObjects.NOTVALUATION, context);
         Boolean tarEnabled = false;
         if (isValuation != null && !isValuation.isEmpty()) {
             AbstractResults tarima = gson.fromJson(isValuation, AbstractResults.class);
@@ -2481,29 +2529,10 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
-    private class doSearchMaterialBackground extends AsyncTask<MaterialDescrptionBean, Void, MaterialDescrptionBean> {
 
-        RouteViewModel asyncModel;
+    //Interface Clases
 
-        public doSearchMaterialBackground(RouteViewModel asyncModel) {
-            this.asyncModel = asyncModel;
-        }
 
-        @Override
-        protected MaterialDescrptionBean doInBackground(MaterialDescrptionBean... materialDescrptionBeans) {
-            MaterialDescrptionBean listBean;
-            return materialDescrptionBeans[0];
-        }
-
-        @Override
-        protected void onPostExecute(MaterialDescrptionBean materialDescrptionBeans) {
-            List<MaterialDescrptionBean> listBean;
-            try {
-                listBean = routeModel.getMaterialByValues(materialDescrptionBeans);
-            } catch (Exception e) {
-                listBean = new ArrayList<>();
-            }
-            setMaterialDataByList(listBean);
-        }
-    }
 }
+
+

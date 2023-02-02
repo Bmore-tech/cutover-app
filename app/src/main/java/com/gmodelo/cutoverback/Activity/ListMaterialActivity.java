@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.WindowManager;
@@ -37,6 +38,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 
 public class ListMaterialActivity extends AppCompatActivity {
 
@@ -135,7 +137,7 @@ public class ListMaterialActivity extends AppCompatActivity {
         TableRow inTableRelRow2 = new TableRow(context);
         TextView maktxrTextView = new TextView(context);
         maktxrTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-        maktxrTextView.setText(lgplaValuesBean.getMatkx().length() >= 20 ? lgplaValuesBean.getMatkx().substring(0, 20) : lgplaValuesBean.getMatkx());
+        maktxrTextView.setText(lgplaValuesBean.getMatkx().length() >= 30 ? lgplaValuesBean.getMatkx().substring(0, 30) : lgplaValuesBean.getMatkx());
         maktxrTextView.setTypeface(maktxrTextView.getTypeface(), Typeface.BOLD);
         inTableRelRow2.addView(maktxrTextView);
         inTableLayout.addView(inTableRelRow);
@@ -307,11 +309,16 @@ public class ListMaterialActivity extends AppCompatActivity {
         areatext.setTooltipText(routeOper.getZone().getZdesc());
         carriltext.setText(zoneOper.getLgpla());
         Iterator it = zoneOper.getLgplaValues().entrySet().iterator();
+        Log.e("debug", "Inciando llenado de lista");
+        int i = 0;
         while (it.hasNext()) {
+            i++;
             final Map.Entry lgplaMap = (Map.Entry) it.next();
             LgplaValuesBean lgplaValuesBean = (LgplaValuesBean) lgplaMap.getValue();
+            Log.e("debug", "Datos de elemento:" + lgplaValuesBean.toString());
             createDinamicMaterialListTable(lgplaMap.getKey().toString(), lgplaValuesBean);
         }
+        Log.e("debug", "Elementos encontrados:" + i);
     }
 
     public void identifyConsole() {

@@ -2,6 +2,7 @@ package com.gmodelo.cutoverback.Activity;
 
 import static com.gmodelo.cutoverback.CustomObjects.CommunicationObjects.COUNTMAPPER;
 import static com.gmodelo.cutoverback.CustomObjects.CommunicationObjects.LASTFETCHED;
+import static com.gmodelo.cutoverback.CustomObjects.CommunicationObjects.LOGMAPPER;
 import static com.gmodelo.cutoverback.CustomObjects.CommunicationObjects.STOREDLOGIN;
 import static com.gmodelo.cutoverback.CustomObjects.CommunicationObjects.TASKCOMPLETED;
 import static com.gmodelo.cutoverback.CustomObjects.ResponseVariability.CUSTOMUPDATEDAYS;
@@ -33,6 +34,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.balsikandar.crashreporter.CrashReporter;
 import com.gmodelo.cutoverback.Api.IResponse;
+import com.gmodelo.cutoverback.Api.ResponseILogin;
 import com.gmodelo.cutoverback.CustomObjects.AbstractResults;
 import com.gmodelo.cutoverback.CustomObjects.CommunicationObjects;
 import com.gmodelo.cutoverback.CustomObjects.GlobalConstants;
@@ -40,6 +42,7 @@ import com.gmodelo.cutoverback.CustomObjects.LoginBean;
 import com.gmodelo.cutoverback.CustomObjects.Request;
 import com.gmodelo.cutoverback.CustomObjects.Response;
 import com.gmodelo.cutoverback.CustomObjects.ResponseVariability;
+import com.gmodelo.cutoverback.DaoBeans.MaterialDescrptionBean;
 import com.gmodelo.cutoverback.DataAccess.InstanceOfDB;
 import com.gmodelo.cutoverback.Instances.RetrofitClient;
 import com.gmodelo.cutoverback.Services.DownloadService;
@@ -50,6 +53,7 @@ import com.gmodelo.cutoverback.Views.DownloadViewModel;
 import com.gmodelo.cutoverback.Views.RouteViewModel;
 import com.gmodelo.cutoverback.beans.AsyncDbProg;
 import com.gmodelo.cutoverback.beans.DownloadDataBean;
+import com.gmodelo.cutoverback.beans.MaterialTarimasBean;
 import com.gmodelo.cutoverback.beans.MobileDataFetch;
 import com.gmodelo.cutoverback.beans.ResponseAllData;
 import com.gmodelo.cutoverback.beans.ResponseCount;
@@ -69,8 +73,10 @@ import java.io.ObjectInputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -78,7 +84,6 @@ import at.markushi.ui.CircleButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
-
 
 public class UpDownActivity extends AppCompatActivity {
 
@@ -323,8 +328,8 @@ public class UpDownActivity extends AppCompatActivity {
             Request<RouteUserBean> request = new Request<>();
             request.setTokenObject(CommonUtilities.getStructureToSend(context));
             RouteUserBean routeUserBean = gson.fromJson(CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context), RouteUserBean.class);
-            Log.e("executeUploadTask", routeUserBean.toString());
             request.setLsObject(routeUserBean);
+            Log.e("executeUploadTask", request.toString());
             new UploadFinalRoute().execute(gson.toJson(request), CommonUtilities.getBaseServer(context) + CommunicationObjects.UPLOADROUTEMODULE);
         } else {
             CommonUtilities.CustomColorWarningDialog("ADVERTENCIA!", "No dispone de conectividad a internet...\nFavor de validar su conectividad!", activity, null, null
@@ -468,7 +473,7 @@ public class UpDownActivity extends AppCompatActivity {
         Request<HashMap<String, String>> request = new Request<>();
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(ResponseVariability.ROW_COUNT, String.valueOf(rowCount));
-        requestMap.put(ResponseVariability.INITIAL_OFFSET, INITIAL_OFFSET_VAL);
+        requestMap.put(ResponseVariability.INITIAL_OFFSET, ResponseVariability.INITIAL_OFFSET_VAL);
         request.setLsObject(requestMap);
         request.setTokenObject(CommonUtilities.getStructureToSend(context));
         try {
@@ -695,6 +700,7 @@ public class UpDownActivity extends AppCompatActivity {
             try {
                 AbstractResults result = result = response.getAbstractResult();
                 if (result.getResultId() == ResponseVariability.SUCCESSFULL) {
+                    Log.i("Ruta Obtenida:", response.toString());
                     Log.i("Ruta Obtenida:", response.getLsObject().toString());
                     CommonUtilities.UpdateStoreGSonVariable(CommunicationObjects.STOREDROUTE, gson.toJson(response.getLsObject()), context);
                     startActivity(new Intent(context, BeginCountActivity.class));
@@ -767,7 +773,10 @@ public class UpDownActivity extends AppCompatActivity {
             cancelLoading();
             if (response != null) {
                 if (response.getAbstractResult().getResultId() == ResponseVariability.SUCCESSFULL) {
-                    CommonUtilities.CustomColorWarningDialog("EXITO", "Ruta cargada de forma exitosa. \n La sesión se cerrará",
+                    RouteUserBean routeUserBean = gson.fromJson(CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context), RouteUserBean.class);
+                    Log.e("logger", routeUserBean.toString());
+
+                    CommonUtilities.CustomColorWarningDialog("EXITO", "Tarea " + routeUserBean.getTaskId() + " \n cargada de forma exitosa. \n \n La sesión se cerrará",
                             activity, null, "Continuar", null, new CommonUtilities.CustomCallBack<Integer>() {
                                 @Override
                                 public void customCallBack(Integer ret) {
@@ -777,37 +786,61 @@ public class UpDownActivity extends AppCompatActivity {
                             , R.drawable.ic_exclamation_white_36dp, context, "#41A802");
 
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.SUCCESSFULL_RECOUNT) {
-                    CommonUtilities.CustomColorWarningDialog("EXITO, RECONTEO", " Ruta cargada de forma exitosa, \n Diferencias encontradas, \n La sesión se cerrará. \n Tienes una tarea nueva: RECONTAR.",
+                    RouteUserBean routeUserBean = gson.fromJson(CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context), RouteUserBean.class);
+                    Log.e("logger", routeUserBean.toString());
+
+                    CommonUtilities.CustomColorWarningDialog("EXITO, RECONTEO", "Tarea " + routeUserBean.getTaskId() + " \n cargada de forma exitosa. \n Diferencias encontradas. \n La sesión se cerrará. \n Tienes una tarea nueva: \n RECONTAR diferencias.",
                             activity, null, "Continuar", null, new CommonUtilities.CustomCallBack<Integer>() {
                                 @Override
                                 public void customCallBack(Integer ret) {
                                     CommonUtilities.cancelSession(context, activity);
                                 }
                             }
-                            , R.drawable.round_note_add_white_36, context, "#41A802");
+                            , R.drawable.ic_exclamation_white_36dp, context, "#41A802");
 
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.SESSIONNOTFOUND) {
                     startActivity(new Intent(activity, LoginActivity.class));
                 } else if (response.getAbstractResult().getResultId() == ResponseVariability.ITASKCLOSED) {
+                    // Enviamos el log al server
+                    RouteUserBean routeUserBean = gson.fromJson(CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context), RouteUserBean.class);
+                    Log.e("prueba", routeUserBean.toString());
+                    //new UpdateApplicationLogs().execute(gson.toJson(routeUserBean), CommonUtilities.getBaseServer(context) + CommunicationObjects.UPDATELOGSTOSERVER);
 
-                    CommonUtilities.CustomColorWarningDialog("¡CONFLICTO!", "Tarea finalizada Previamente, la sesión se cerrará",
-                            activity, null, "Continuar", "Salir", new CommonUtilities.CustomCallBack<Integer>() {
+                    CommonUtilities.CustomColorWarningDialog("¡ERROR!", "Conteo no válido \n al continuar el conteo NO SERÁ envíado.\n El error será enviado al servidor.",
+                            activity, null, "Continuar", null, new CommonUtilities.CustomCallBack<Integer>() {
                                 @Override
                                 public void customCallBack(Integer ret) {
-                                    cancelSession.setEnabled(true);
-                                    upload.setEnabled(false);
-                                    isCompleted.setTaskUploaded(true);
-                                    isCompleted.setTaskInitiated(false);
-                                    CommonUtilities.UpdateStoreGSonVariable(TASKCOMPLETED, gson.toJson(isCompleted), context);
 
-                                    CommonUtilities.loggerAPI(new Exception("La tarea fue previamente concluida por otro usuario." +
-                                            "Usuario que intento cargar la tarea: " + storedLogin.getLoginBean().getLoginId() + "\n" +
-                                            storedLogin.getLoginBean().getLsObjectLB().getGenInf().getName() + " " +
-                                            storedLogin.getLoginBean().getLsObjectLB().getGenInf().getLastName() + "\n" +
-                                            CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context)), context);
+                                    // Segúndo mensaje de adevertencia.
+                                    /*CommonUtilities.CustomColorWarningDialog("¡ERROR!", "Envíando error al servidor",
+                                            activity, null, "Continuar", null, new CommonUtilities.CustomCallBack<Integer>() {
+                                                @Override
+                                                public void customCallBack(Integer ret) {
+                                                    CommonUtilities.cancelSession(context, activity);
+*/
+                                                    // Nuevo código encapsulado
+                                                    cancelSession.setEnabled(true);
+                                                    upload.setEnabled(false);
+                                                    isCompleted.setTaskUploaded(true);
+                                                    isCompleted.setTaskInitiated(false);
+                                                    CommonUtilities.UpdateStoreGSonVariable(TASKCOMPLETED, gson.toJson(isCompleted), context);
+                                                    CommonUtilities.cancelSession(context, activity);
+                                                    startActivity(new Intent(context, LoginActivity.class));
 
-                                    CommonUtilities.cancelSession(context, activity);
-                                    startActivity(new Intent(context, LoginActivity.class));
+/*
+                                                    // Imprimimos al LOG del teléfono
+                                                    CommonUtilities.loggerAPI(new Exception("La tarea fue previamente concluida por otro usuario." +
+                                                            "Usuario que intento cargar la tarea: " + storedLogin.getLoginBean().getLoginId() + "\n" +
+                                                            storedLogin.getLoginBean().getLsObjectLB().getGenInf().getName() + " " +
+                                                            storedLogin.getLoginBean().getLsObjectLB().getGenInf().getLastName() + "\n" +
+                                                            CommonUtilities.PushGsonVariable(CommunicationObjects.STOREDROUTE, context)), context);
+
+
+                                                }
+                                            }
+                                            , R.drawable.ic_exclamation_white_36dp, context, "#41A802");*/
+
+
                                 }
                             }
                             , R.drawable.ic_exclamation_white_36dp, context, "#FF0000");
@@ -1306,7 +1339,7 @@ public class UpDownActivity extends AppCompatActivity {
                             if (newResult.getResultId() == ResponseVariability.SUCCESSFULL) {
                                 cancelLoading();
                                 MobileDataFetch mobile = new MobileDataFetch(new Date().getTime());
-                                CommonUtilities.UpdateStoreGSonVariable(LASTFETCHED, gson.toJson(mobile), context);
+                                CommonUtilities.UpdateStoreGSonVariable(CommunicationObjects.LASTFETCHED, gson.toJson(mobile), context);
                                 CommonUtilities.CustomWarningDialog("ADVERTENCIA!", "Datos Maestros Actualizados Correctamente", activity, null, null
                                         , null, new CommonUtilities.CustomCallBack<Integer>() {
                                             @Override
@@ -1432,6 +1465,87 @@ public class UpDownActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(String... values) {
             proccessMessage.setText(values[0]);
+        }
+    }
+
+    private class UpdateApplicationLogs extends AsyncTask<String, Void, Response> {
+
+        @Override
+        protected Response doInBackground(String... values) {
+            String toReturn = "";
+            StringBuilder sb = new StringBuilder();
+            byte[] postData;
+            try {
+
+                String urlParameters = values[0];
+                postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+                HttpURLConnection connect = new CommonUtilities().CustomHttpsConnection(postData, context, values);
+                try (DataOutputStream wr = new DataOutputStream(connect.getOutputStream())) {
+                    if (CommonUtilities.checkAuthorization(CommonUtilities.AUTH)) {
+                        wr.write(postData);
+                    }
+                }
+                InputStreamReader reader = new InputStreamReader(connect.getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(reader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (Exception e) {
+                CommonUtilities.loggerAPI(e, context);
+                CrashReporter.logException(e);
+                return null;
+            }
+            toReturn = sb.toString();
+            if (toReturn.isEmpty()) {
+                return null;
+            } else {
+                return gson.fromJson(toReturn, Response.class);
+            }
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Response abstractResults) {
+            try {
+                if (abstractResults.getAbstractResult().getResultId() == ResponseVariability.SUCCESSFULL) {
+                    cancelLoading();
+                    CommonUtilities.PopGsonVariable(LOGMAPPER, context);
+
+                    CommonUtilities.CustomColorWarningDialog("ADVERTENCIA!", "Logs Enviados con exito", activity, null, null
+                            , null, new CommonUtilities.CustomCallBack<Integer>() {
+                                @Override
+                                public void customCallBack(Integer ret) {
+                                    //CommonUtilities.cancelData(context);
+                                    //finishAndRemoveTask();
+                                    //startActivity(new Intent(context, LoginActivity.class));
+
+                                }
+                            }, null, context, null);
+                } else {
+                    cancelLoading();
+                    CommonUtilities.CustomWarningDialog("ADVERTENCIA!", "Ocurrio un error durante el envio de los logs.", activity, null, null
+                            , null, new CommonUtilities.CustomCallBack<Integer>() {
+                                @Override
+                                public void customCallBack(Integer ret) {
+                                    //CommonUtilities.cancelData(context);
+                                }
+                            }, null, context);
+                }
+            } catch (Exception e) {
+                CommonUtilities.loggerAPI(e, context);
+                CrashReporter.logException(e);
+                cancelLoading();
+                CommonUtilities.CustomWarningDialog("ADVERTENCIA!", "Ocurrio un error durante el envio de los logs.", activity, null, null
+                        , null, new CommonUtilities.CustomCallBack<Integer>() {
+                            @Override
+                            public void customCallBack(Integer ret) {
+                                //CommonUtilities.cancelData(context);
+                            }
+                        }, null, context);
+
+            }
         }
     }
 }

@@ -37,6 +37,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.balsikandar.crashreporter.CrashReporter;
 import com.gmodelo.cutoverback.Api.ResponseILogin;
 import com.gmodelo.cutoverback.CustomObjects.AbstractResults;
@@ -60,8 +65,7 @@ import com.gmodelo.cutoverback.beans.ResponseLogin;
 import com.gmodelo.cutoverback.beans.ServerBean;
 import com.google.gson.Gson;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -77,9 +81,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import okhttp3.internal.http.HttpHeaders;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
+
 
 public class LoginActivity extends AppCompatActivity {
 
