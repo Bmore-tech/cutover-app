@@ -7,8 +7,8 @@ android {
         applicationId "com.gmodelo.cutoverback"
         minSdk 26
         targetSdk 30
-        versionCode 35
-        versionName "35_rev"
+        versionCode 1
+        versionName "1_rev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
