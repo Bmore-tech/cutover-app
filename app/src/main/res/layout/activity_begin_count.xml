@@ -23,12 +23,12 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|center_horizontal|center">
             <ImageView
-                android:layout_width="48dp"
+                android:layout_width="50dp"
                 android:layout_height="48dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/inventarios_ciclicos"
+                android:background="@drawable/cutover"
                 android:backgroundTintMode="src_in"
 
                 />

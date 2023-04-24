@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
         String baseDataServer = CommonUtilities.PushGsonVariable(SERVERVALUE, context);
 
         if (baseDataServer == null) {
-            CommonUtilities.UpdateStoreGSonVariable(SERVERVALUE, gson.toJson(ResponseVariability.RELATIONINVESERVER.get(ResponseVariability.DEV_INV_E_ID)), context);
+            CommonUtilities.UpdateStoreGSonVariable(SERVERVALUE, gson.toJson(ResponseVariability.RELATIONINVESERVER.get(ResponseVariability.PRD_INV_E_ID)), context);
             CommonUtilities.UpdateStoreGSonVariable(DEVICEID, UUID.randomUUID().toString(), context);
             MapServerBean mapServer = new MapServerBean(ResponseVariability.RELATIONINVESERVER);
             CommonUtilities.UpdateStoreGSonVariable(SERVERMAPPING, gson.toJson(mapServer), context);

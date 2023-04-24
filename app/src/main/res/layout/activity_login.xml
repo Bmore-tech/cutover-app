@@ -166,11 +166,11 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="100dp"
                 android:layout_below="@+id/imageView2"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/inventarios_ciclicos" />
+                android:src="@drawable/cutover" />
 
         </RelativeLayout>
 
